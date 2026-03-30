@@ -1,0 +1,382 @@
+# SQuAD/CC-News P0 基线：固定重写 → Levenshtein/n-gram 特征 → LR/XGBoost 评估
+
+## 背景
+
+基于 Raidar 原仓库的 Invariance 检测流水线，为 SQuAD 和 CC-News 两个数据集建立 P0 基线。核心改动：
+
+1. **提示词**：采用区间约束 (±10%) 的 P0 固定提示词，而非原仓库的 7 条 prompt 池
+2. **特征**：在原仓库 n-gram overlap + fuzzywuzzy 基础上，**新增 Levenshtein 编辑距离**
+3. **分类器**：用 LR 和 XGBoost 替代原仓库的 MLP
+4. **评估**：新增 AUROC 和 TPR@FPR（原仓库只有 acc/f1）
+
+> [!IMPORTANT]
+> **前置条件**：本计划假设你已有 SQuAD 和 CC-News 的原始数据（人类写的 + AI 生成的）。如果还没有准备好这些数据，需要先确认数据来源和格式。请确认：
+> 1. SQuAD / CC-News 数据是否已经准备好？格式是什么？
+> 2. "AI 生成文本"是已有的还是需要你自己生成的？
+> 3. DeepSeek API key 和 base_url 是否可用？
+
+---
+
+## 原仓库代码分析
+
+### 现有数据格式（JSON 数组）
+
+原仓库 Yelp 的数据格式（[rewrite_yelp_GPT_inv.json](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/Yelp/rewrite_yelp_GPT_inv.json)）：
+
+```json
+[
+  {
+    "input": "原始文本（人类写/AI生成）",
+    "Revise this with your best effort": "重写文本1",
+    "Help me polish this": "重写文本2",
+    "Rewrite this for me": "重写文本3",
+    ...
+  },
+  ...
+]
+```
+
+每条数据包含 `input`（原文）+ 多个 prompt key → 对应的重写结果。
+
+### 现有可复用代码
+
+| 文件 | 可复用部分 | 需要修改的部分 |
+|------|-----------|--------------|
+| [deepseek_rewrite_by_idx.py](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/deepseek_rewrite_by_idx.py) | API 调用、重试逻辑、断点续传、[build_user_prompt()](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/deepseek_rewrite_by_idx.py#45-56) 已实现 ±10% 约束 | 需要适配 P0 单提示词模式 + 词数偏离检查 |
+| [detect_yelp_inv.py](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/Yelp/detect_yelp_inv.py) | [tokenize_and_normalize](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/%E9%80%9A%E7%94%A8%E8%B7%91%E5%88%86%E8%84%9A%E6%9C%AC-10%E4%B8%AAseed%E5%8F%96%E5%9D%87%E5%80%BC%E7%89%88%E6%9C%AC.py#18-20), [extract_ngrams](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/%E9%80%9A%E7%94%A8%E8%B7%91%E5%88%86%E8%84%9A%E6%9C%AC-10%E4%B8%AAseed%E5%8F%96%E5%9D%87%E5%80%BC%E7%89%88%E6%9C%AC.py#22-24), [calculate_sentence_common](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/%E9%80%9A%E7%94%A8%E8%B7%91%E5%88%86%E8%84%9A%E6%9C%AC-10%E4%B8%AAseed%E5%8F%96%E5%9D%87%E5%80%BC%E7%89%88%E6%9C%AC.py#30-44), fuzzywuzzy 特征 | 需新增 Levenshtein 特征；分类器从 MLP → LR/XGBoost |
+| [通用跑分脚本-10个seed取均值版本.py](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/通用跑分脚本-10个seed取均值版本.py) | 多 seed 评估框架、特征提取函数 | 需集成 AUROC、TPR@FPR、LR/XGBoost |
+
+---
+
+## Proposed Changes
+
+### 组件一：P0 重写脚本
+
+#### [NEW] [rewrite_p0.py](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/scripts/rewrite_p0.py)
+
+专用于 P0 基线的 DeepSeek 重写脚本。基于 [deepseek_rewrite_by_idx.py](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/deepseek_rewrite_by_idx.py) 简化重构：
+
+**核心设计**：
+- **只用 1 条固定 P0 提示词**（而非原仓库的 7 条 prompt 池）
+- **区间约束 ±10%**：计算原文词数 `n0`，`round_to_nearest_5(n0)`，`clamp(120, 260)`，向 DeepSeek 发送 "about {n_words} words (±10%)"
+- **词数偏离检查**：若输出词数偏离 >10%，自动重试一次；仍失败则保留并标记 `length_violation=true`
+- **缓存字段**：`text_id`, `dataset`, `split`, `prompt_id=P0`, `n_words`, `word_count_out`, `length_violation`, `rewritten_text`
+
+**P0 提示词（区间约束版）**：
+
+```text
+System: You are a careful editor.
+
+User:
+Rewrite the following paragraph to improve fluency while preserving meaning.
+Target length: between {n_min} and {n_max} words (close to the original length).
+- Do NOT add new facts, names, numbers, or claims.
+- Do NOT delete important information.
+- Do NOT summarize.
+Output ONLY the rewritten paragraph.
+
+Paragraph:
+{input_text}
+```
+
+其中 `n_min = round(n0 * 0.9)`, `n_max = round(n0 * 1.1)`。
+
+**输入**：标准 JSON（与原仓库格式一致）或者可接受原始文本列表
+
+**输出格式**：
+
+```json
+[
+  {
+    "input": "原始文本",
+    "P0_rewrite": "重写结果",
+    "_meta": {
+      "text_id": "sha256_前8位",
+      "dataset": "squad",
+      "split": "test",
+      "prompt_id": "P0",
+      "n_words_target": 150,
+      "n_min": 135,
+      "n_max": 165,
+      "word_count_in": 148,
+      "word_count_out": 152,
+      "length_violation": false,
+      "rewriter_model": "deepseek-chat",
+      "temperature": 0.2
+    }
+  },
+  ...
+]
+```
+
+**命令行用法**：
+```bash
+python scripts/rewrite_p0.py \
+  --in_json SQuAD/squad_gpt_raw.json \
+  --out_json SQuAD/rewrite_squad_gpt_P0.json \
+  --dataset squad --split test \
+  --api_key "YOUR_KEY" --resume
+```
+
+---
+
+### 组件二：特征提取 + 分类器训练评估脚本
+
+#### [NEW] [baseline_p0_eval.py](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/scripts/baseline_p0_eval.py)
+
+将特征提取和分类器训练评估合并为一个端到端脚本。
+
+**Step 1：特征提取**
+
+从 P0 重写结果中提取特征，每条样本生成一个定长特征向量：
+
+| # | 特征 | 公式 | 维度 | 来源 |
+|---|------|------|------|------|
+| 1 | 归一化 Levenshtein 距离 | `lev_dist(orig, rewrite) / max(len(orig), len(rewrite))` | 1 | **新增** |
+| 2 | fuzz.ratio | `fuzz.ratio(orig, rewrite)` | 1 | 原仓库 |
+| 3 | fuzz.token_set_ratio | `fuzz.token_set_ratio(orig, rewrite)` | 1 | 原仓库 |
+| 4 | 共同 unigram 数 / 原文词数 | `common_words / n_words` | 1 | 原仓库 |
+| 5 | 共同 bigram 数 / 原文词数 | `common_2gram / n_words` | 1 | 原仓库 |
+| 6 | 共同 trigram 数 / 原文词数 | `common_3gram / n_words` | 1 | 原仓库 |
+| 7 | 共同 4-gram 数 / 原文词数 | `common_4gram / n_words` | 1 | 原仓库 |
+
+**注意**：P0 模式下只有 1 次重写（而非原仓库的 7 次），因此不需要 `avg_common_features` 和 `ori_vs_allcombined` 等聚合特征。特征维度为 **7 维**。
+
+Levenshtein 距离使用 `python-Levenshtein` 库（`pip install python-Levenshtein`），它是 C 实现的，速度远快于纯 Python。
+
+```python
+import Levenshtein
+
+def normalized_levenshtein(s1: str, s2: str) -> float:
+    """归一化 Levenshtein 距离，值域 [0, 1]"""
+    dist = Levenshtein.distance(s1, s2)
+    max_len = max(len(s1), len(s2))
+    return dist / max_len if max_len > 0 else 0.0
+```
+
+**Step 2：分类器训练**
+
+用两种轻量分类器替代原仓库的 MLP：
+
+**a) Logistic Regression (LR)**
+```python
+from sklearn.linear_model import LogisticRegression
+
+clf_lr = LogisticRegression(
+    max_iter=1000,
+    solver='lbfgs',
+    random_state=seed,
+)
+```
+
+**b) XGBoost**
+```python
+from xgboost import XGBClassifier
+
+clf_xgb = XGBClassifier(
+    n_estimators=100,
+    max_depth=3,
+    learning_rate=0.1,
+    random_state=seed,
+    use_label_encoder=False,
+    eval_metric='logloss',
+)
+```
+
+**Step 3：评估指标**
+
+原仓库只输出 accuracy 和 F1，我们需要新增：
+
+```python
+from sklearn.metrics import (
+    accuracy_score, f1_score, roc_auc_score,
+    classification_report
+)
+
+def tpr_at_fpr(y_true, y_score, target_fpr=0.05):
+    """计算在 FPR ≤ target_fpr 时的最大 TPR"""
+    from sklearn.metrics import roc_curve
+    fpr, tpr, thresholds = roc_curve(y_true, y_score)
+    # 找到 FPR ≤ target_fpr 的最大 TPR
+    valid = fpr <= target_fpr
+    if valid.any():
+        return float(tpr[valid][-1])
+    return 0.0
+```
+
+评估时使用 `predict_proba()` 获取概率分数来计算 AUROC 和 TPR@FPR。
+
+**Step 4：多 seed 取均值**
+
+沿用原仓库 `通用跑分脚本-10个seed取均值版本.py` 的多 seed 逻辑，默认跑 10 个 seed（42~51）。
+
+**输出格式**（JSON）：
+
+```json
+{
+  "timestamp": "2026-03-05T20:00:00",
+  "config": {
+    "dataset": "squad",
+    "prompt_id": "P0",
+    "classifiers": ["LR", "XGBoost"],
+    "seeds": [42, 43, ..., 51],
+    "feature_dim": 7,
+    "n_samples": {"ai": 350, "human": 350}
+  },
+  "results": {
+    "LR": {
+      "acc_mean": 0.85, "acc_std": 0.02,
+      "f1_mean": 0.84, "f1_std": 0.02,
+      "auroc_mean": 0.91, "auroc_std": 0.01,
+      "tpr_at_fpr5_mean": 0.65, "tpr_at_fpr5_std": 0.03,
+      "per_seed": [...]
+    },
+    "XGBoost": { "..." }
+  }
+}
+```
+
+**命令行用法**：
+```bash
+python scripts/baseline_p0_eval.py \
+  --ai_json SQuAD/rewrite_squad_gpt_P0.json \
+  --human_json SQuAD/rewrite_squad_human_P0.json \
+  --out_json outputs/baseline_squad_P0.json \
+  --multi_seeds 10
+```
+
+---
+
+### 组件三：配置文件
+
+#### [NEW] [config_p0.yaml](file:///e:/jnu/Final_thesis/实验/Raidar/RaidarLLMDetect/scripts/config_p0.yaml)
+
+将所有超参数集中管理，保证可复现：
+
+```yaml
+# P0 基线配置
+prompt:
+  id: P0
+  template: "区间约束版"
+  length_policy: range       # range | exact
+  n_min_global: 120
+  n_max_global: 260
+  tolerance_pct: 0.10        # ±10%
+  retry_on_violation: true
+  max_retries: 1
+
+rewriter:
+  model: deepseek-chat
+  temperature: 0.2
+  timeout: 120
+  api_retries: 6
+
+features:
+  levenshtein: true
+  fuzz_ratio: true
+  fuzz_token_set_ratio: true
+  ngram_range: [1, 2, 3, 4]
+
+classifiers:
+  - name: LR
+    params:
+      max_iter: 1000
+      solver: lbfgs
+  - name: XGBoost
+    params:
+      n_estimators: 100
+      max_depth: 3
+      learning_rate: 0.1
+
+evaluation:
+  test_size: 0.2
+  seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+  metrics: [accuracy, f1, auroc, tpr_at_fpr5]
+```
+
+---
+
+## 文件变更汇总
+
+| 操作 | 文件 | 说明 |
+|------|------|------|
+| **NEW** | `scripts/rewrite_p0.py` | P0 重写脚本（区间约束 + 词数检查 + 缓存） |
+| **NEW** | `scripts/baseline_p0_eval.py` | 特征提取 + LR/XGBoost 训练 + AUROC/F1/TPR@FPR 评估 |
+| **NEW** | `scripts/config_p0.yaml` | 集中配置文件 |
+| 不修改 | [deepseek_rewrite_by_idx.py](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/deepseek_rewrite_by_idx.py) | 保留原文件不动，新脚本独立 |
+| 不修改 | `通用跑分脚本-10个seed取均值版本.py` | 保留原文件不动 |
+
+> [!NOTE]
+> 采用"新建脚本、不改原文件"策略，避免影响你已有的 Yelp/Arxiv/Code 实验流程。
+
+---
+
+## 端到端执行流程
+
+```
+SQuAD/CC-News 原始数据
+  │
+  ▼
+[rewrite_p0.py]  ←  config_p0.yaml
+  │ 调用 DeepSeek API
+  │ ±10% 区间约束
+  │ 词数偏离检查 + 重试
+  ▼
+重写缓存 JSON (rewrite_*_P0.json)
+  │
+  ▼
+[baseline_p0_eval.py]  ←  config_p0.yaml
+  │ 提取 7 维特征
+  │ 训练 LR / XGBoost
+  │ 10 个 seed 取均值
+  ▼
+结果 JSON (outputs/baseline_*_P0.json)
+  ├── acc_mean ± std
+  ├── f1_mean ± std
+  ├── auroc_mean ± std
+  └── tpr_at_fpr5_mean ± std
+```
+
+---
+
+## Verification Plan
+
+### 自动化验证
+
+1. **特征提取正确性验证**：
+   - 用一条已知文本对，手动计算 Levenshtein 距离和 n-gram overlap，与脚本输出对比
+   - 命令：
+     ```bash
+     python -c "
+     import Levenshtein
+     s1 = 'The cat sat on the mat'
+     s2 = 'A cat was sitting on the mat'
+     dist = Levenshtein.distance(s1, s2)
+     print(f'distance={dist}, normalized={dist/max(len(s1),len(s2)):.4f}')
+     "
+     ```
+
+2. **分类器 sanity check**：
+   - 先在 Yelp 数据上跑 `baseline_p0_eval.py`（把 Yelp 的第一条 prompt 重写当作 "P0_rewrite"），确认 acc/f1 与原仓库 [detect_yelp_inv.py](file:///e:/jnu/Final_thesis/%E5%AE%9E%E9%AA%8C/Raidar/RaidarLLMDetect/Yelp/detect_yelp_inv.py) 在同量级
+   - 命令：
+     ```bash
+     python scripts/baseline_p0_eval.py \
+       --ai_json Yelp/rewrite_yelp_GPT_inv.json \
+       --human_json Yelp/rewrite_yelp_human_inv.json \
+       --out_json outputs/sanity_yelp_P0.json \
+       --rewrite_key "Revise this with your best effort" \
+       --multi_seeds 10
+     ```
+
+3. **AUROC / TPR@FPR 指标验证**：
+   - 在 sanity check 中检查 AUROC 是否 ≥ acc（正常情况下应如此）
+   - 检查 TPR@FPR=5% 是否在 [0, 1] 范围内
+
+### 人工验证
+
+1. **检查重写缓存 JSON**：打开生成的 `rewrite_*_P0.json`，抽查 5 条，确认：
+   - 重写文本语义与原文一致
+   - 词数在 ±10% 区间内
+   - `_meta` 字段完整
+   
+2. **确认结果 JSON 可读**：检查 `outputs/baseline_*_P0.json` 中的指标是否符合预期

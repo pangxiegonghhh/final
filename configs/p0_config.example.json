@@ -1,0 +1,55 @@
+{
+    "_comment": "复制此文件为 p0_config.json，填入真实的 api_key 后即可运行",
+    "api_key": "sk-YOUR_DEEPSEEK_API_KEY_HERE",
+    "datasets": {
+        "squad": {
+            "hf_name": "rajpurkar/squad",
+            "split": "train",
+            "text_field": "context",
+            "sample_size": 2000,
+            "length_filter": {
+                "min_words": 50,
+                "max_words": 300
+            }
+        },
+        "cc_news": {
+            "hf_name": "cc_news",
+            "split": "train",
+            "text_field": "text",
+            "sample_size": 2000,
+            "length_filter": {
+                "min_words": 50,
+                "max_words": 300
+            }
+        }
+    },
+    "rewriter": {
+        "model": "deepseek-chat",
+        "base_url": "https://api.deepseek.com/v1",
+        "temperature": 0.7,
+        "max_tokens": 1024,
+        "length_policy": "range",
+        "length_tolerance": 0.10
+    },
+    "features": [
+        "lev_ratio",
+        "ngram_1",
+        "ngram_2",
+        "ngram_3",
+        "ngram_4"
+    ],
+    "classifiers": [
+        "LR",
+        "XGBoost",
+        "MLP"
+    ],
+    "eval": {
+        "seed_start": 42,
+        "num_seeds": 10,
+        "test_ratio": 0.2,
+        "fpr_thresholds": [
+            0.01,
+            0.05
+        ]
+    }
+}

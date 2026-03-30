@@ -1,0 +1,34 @@
+remote: error: GH013: Repository rule violations found for refs/heads/p0-baseline.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
+remote:             
+remote:             
+remote:       —— OpenAI API Key ————————————————————————————————————        
+remote:        locations:        
+remote:          - commit: b3fd63b46467a3dd714e7844991e194219ad07d3        
+remote:            path: Arxiv/fake_gen_by_diff_diff_model/arxiv_gen_other_fake.py:5        
+remote:          - commit: b3fd63b46467a3dd714e7844991e194219ad07d3        
+remote:            path: Code/gen_inv_rewrite.py:5        
+remote:          - commit: b3fd63b46467a3dd714e7844991e194219ad07d3        
+remote:            path: Code/gen_uncertain_rewrite.py:6        
+remote:          - commit: b3fd63b46467a3dd714e7844991e194219ad07d3        
+remote:            path: Yelp/evade/gen_yelp_rewrite.py:5        
+remote:          - commit: b3fd63b46467a3dd714e7844991e194219ad07d3        
+remote:            path: Yelp/fake_gen_by_diff_model/gen_inv_rewrite4detect.py:6        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/pangxiegonghhh/final/security/secret-scanning/unblock-secret/3Bfg8c7NNOUOq434YGz2dnfvgdw        
+remote:             
+remote: 
+remote: 
+To https://github.com/pangxiegonghhh/final.git
+ ! [remote rejected] p0-baseline -> p0-baseline (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/pangxiegonghhh/final.git'
