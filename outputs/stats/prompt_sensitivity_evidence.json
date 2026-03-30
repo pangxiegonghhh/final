@@ -1,0 +1,812 @@
+{
+  "meta": {
+    "root": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect",
+    "note": "Stage-B evidence for needing ensemble (C) / routing (D). Uses per-prompt 10-seed json under outputs/10seed测试/prompt_sensitivity/..",
+    "metrics": [
+      "acc",
+      "f1"
+    ]
+  },
+  "groups": {
+    "Arxiv/deepseek": {
+      "domain": "Arxiv",
+      "rewriter": "deepseek",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek",
+      "num_prompts": 7,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.5828571428571427,
+          "max": 0.6242857142857143,
+          "range": 0.04142857142857159,
+          "mean": 0.6025510204081632,
+          "std": 0.01492530804418458,
+          "iqr": 0.01821428571428585
+        },
+        "f1": {
+          "min": 0.5671483287005082,
+          "max": 0.6116968535670972,
+          "range": 0.044548524866589,
+          "mean": 0.587051016228824,
+          "std": 0.017196398284867853,
+          "iqr": 0.02535437983879618
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            2,
+            0,
+            1,
+            3,
+            1,
+            1,
+            2
+          ],
+          "top1_change_rate": 0.7
+        },
+        "f1": {
+          "winner_counts": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1,
+            3
+          ],
+          "top1_change_rate": 0.7
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.6428571428571427,
+          "best_single_mean": 0.6242857142857143,
+          "gap": 0.01857142857142835
+        },
+        "f1": {
+          "oracle_mean": 0.6293226701869946,
+          "best_single_mean": 0.6116968535670972,
+          "gap": 0.017625816619897372
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.32663888197604607,
+        "f1": 0.47939594839139893
+      },
+      "friedman_p": {
+        "acc": 0.025922164454735372,
+        "f1": 0.22127965838415606
+      },
+      "prompts": [
+        {
+          "slug": "0e71ab1d20",
+          "acc_mean": 0.5942857142857142,
+          "acc_std": 0.0407581217648203,
+          "f1_mean": 0.5671483287005082,
+          "f1_std": 0.050294933703042936,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_0e71ab1d20.json"
+        },
+        {
+          "slug": "40e219c505",
+          "acc_mean": 0.605,
+          "acc_std": 0.025162735648297917,
+          "f1_mean": 0.5928085663773712,
+          "f1_std": 0.03356585234890745,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_40e219c505.json"
+        },
+        {
+          "slug": "53e711ad1e",
+          "acc_mean": 0.5971428571428572,
+          "acc_std": 0.036168539717634736,
+          "f1_mean": 0.5820375538178832,
+          "f1_std": 0.03842560675235883,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_53e711ad1e.json"
+        },
+        {
+          "slug": "53f0588c52",
+          "acc_mean": 0.6242857142857143,
+          "acc_std": 0.030338229402279003,
+          "f1_mean": 0.6067830022195646,
+          "f1_std": 0.03906633152698312,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_53f0588c52.json"
+        },
+        {
+          "slug": "8f0a1ad264",
+          "acc_mean": 0.5942857142857141,
+          "acc_std": 0.03207134902949093,
+          "f1_mean": 0.5760417695338363,
+          "f1_std": 0.044345192586184204,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_8f0a1ad264.json"
+        },
+        {
+          "slug": "a528e08fd4",
+          "acc_mean": 0.5828571428571427,
+          "acc_std": 0.027142857142857142,
+          "f1_mean": 0.572841039385507,
+          "f1_std": 0.03873036908995563,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_a528e08fd4.json"
+        },
+        {
+          "slug": "f58cc65f6c",
+          "acc_mean": 0.6199999999999999,
+          "acc_std": 0.03362457798839949,
+          "f1_mean": 0.6116968535670972,
+          "f1_std": 0.03781231173188355,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\deepseek\\prompt_f58cc65f6c.json"
+        }
+      ]
+    },
+    "Arxiv/repo": {
+      "domain": "Arxiv",
+      "rewriter": "repo",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo",
+      "num_prompts": 7,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.6828571428571429,
+          "max": 0.7642857142857143,
+          "range": 0.0814285714285714,
+          "mean": 0.7205102040816327,
+          "std": 0.02779821081978732,
+          "iqr": 0.03499999999999992
+        },
+        "f1": {
+          "min": 0.6810846294106316,
+          "max": 0.7558809291474646,
+          "range": 0.074796299736833,
+          "mean": 0.7155119781458493,
+          "std": 0.02611529761299013,
+          "iqr": 0.03399082251378316
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            1,
+            0,
+            1,
+            0,
+            0,
+            2,
+            6
+          ],
+          "top1_change_rate": 0.4
+        },
+        "f1": {
+          "winner_counts": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            6
+          ],
+          "top1_change_rate": 0.4
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.7735714285714285,
+          "best_single_mean": 0.7642857142857143,
+          "gap": 0.00928571428571412
+        },
+        "f1": {
+          "oracle_mean": 0.7711450076296398,
+          "best_single_mean": 0.7558809291474646,
+          "gap": 0.015264078482175147
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.06559552843124176,
+        "f1": 0.07559289690703701
+      },
+      "friedman_p": {
+        "acc": 7.725801663073616e-05,
+        "f1": 0.0005693377167074609
+      },
+      "prompts": [
+        {
+          "slug": "0e71ab1d20",
+          "acc_mean": 0.7164285714285714,
+          "acc_std": 0.03938947336846354,
+          "f1_mean": 0.7049520139218091,
+          "f1_std": 0.038926231719158974,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_0e71ab1d20.json"
+        },
+        {
+          "slug": "40e219c505",
+          "acc_mean": 0.6971428571428572,
+          "acc_std": 0.028428212488760568,
+          "f1_mean": 0.6904759977359322,
+          "f1_std": 0.03920576794155575,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_40e219c505.json"
+        },
+        {
+          "slug": "53e711ad1e",
+          "acc_mean": 0.7364285714285714,
+          "acc_std": 0.02313447820100235,
+          "f1_mean": 0.7298383075919457,
+          "f1_std": 0.024176475494134212,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_53e711ad1e.json"
+        },
+        {
+          "slug": "53f0588c52",
+          "acc_mean": 0.707857142857143,
+          "acc_std": 0.037039691892754786,
+          "f1_mean": 0.712780620119801,
+          "f1_std": 0.036259786671082636,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_53f0588c52.json"
+        },
+        {
+          "slug": "8f0a1ad264",
+          "acc_mean": 0.6828571428571429,
+          "acc_std": 0.03559981655536318,
+          "f1_mean": 0.6810846294106316,
+          "f1_std": 0.041351624071179004,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_8f0a1ad264.json"
+        },
+        {
+          "slug": "a528e08fd4",
+          "acc_mean": 0.7385714285714287,
+          "acc_std": 0.02415933503612536,
+          "f1_mean": 0.733571349093362,
+          "f1_std": 0.025951351463463293,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_a528e08fd4.json"
+        },
+        {
+          "slug": "f58cc65f6c",
+          "acc_mean": 0.7642857142857143,
+          "acc_std": 0.025354627641855487,
+          "f1_mean": 0.7558809291474646,
+          "f1_std": 0.03138726053675827,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Arxiv\\repo\\prompt_f58cc65f6c.json"
+        }
+      ]
+    },
+    "Code/deepseek": {
+      "domain": "Code",
+      "rewriter": "deepseek",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek",
+      "num_prompts": 5,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.7424242424242424,
+          "max": 0.8151515151515151,
+          "range": 0.07272727272727264,
+          "mean": 0.7648484848484849,
+          "std": 0.030929137884007224,
+          "iqr": 0.030303030303030276
+        },
+        "f1": {
+          "min": 0.7245144574685991,
+          "max": 0.8021332906222106,
+          "range": 0.07761883315361151,
+          "mean": 0.7492890551894269,
+          "std": 0.0308922674277071,
+          "iqr": 0.016709906142909237
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            2,
+            0,
+            1,
+            7,
+            0
+          ],
+          "top1_change_rate": 0.30000000000000004
+        },
+        "f1": {
+          "winner_counts": [
+            1,
+            0,
+            1,
+            7,
+            1
+          ],
+          "top1_change_rate": 0.30000000000000004
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.8242424242424242,
+          "best_single_mean": 0.8151515151515151,
+          "gap": 0.00909090909090915
+        },
+        "f1": {
+          "oracle_mean": 0.8178712490844291,
+          "best_single_mean": 0.8021332906222106,
+          "gap": 0.015737958462218482
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.3491407198241001,
+        "f1": 0.4399531392771957
+      },
+      "friedman_p": {
+        "acc": 0.007872841563442458,
+        "f1": 0.027541061029938845
+      },
+      "prompts": [
+        {
+          "slug": "040352ab14",
+          "acc_mean": 0.7742424242424243,
+          "acc_std": 0.05090999277700437,
+          "f1_mean": 0.749497799856866,
+          "f1_std": 0.06586529984379556,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek\\prompt_040352ab14.json"
+        },
+        {
+          "slug": "478bb70838",
+          "acc_mean": 0.7424242424242424,
+          "acc_std": 0.05945883900105631,
+          "f1_mean": 0.7327878937139568,
+          "f1_std": 0.06457470504241042,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek\\prompt_478bb70838.json"
+        },
+        {
+          "slug": "6e1a5a23e3",
+          "acc_mean": 0.7484848484848485,
+          "acc_std": 0.05169309730070297,
+          "f1_mean": 0.7375118342855018,
+          "f1_std": 0.06849323716798882,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek\\prompt_6e1a5a23e3.json"
+        },
+        {
+          "slug": "d3a28d2e42",
+          "acc_mean": 0.8151515151515151,
+          "acc_std": 0.024242424242424267,
+          "f1_mean": 0.8021332906222106,
+          "f1_std": 0.03212793486454025,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek\\prompt_d3a28d2e42.json"
+        },
+        {
+          "slug": "dea7fdde3a",
+          "acc_mean": 0.743939393939394,
+          "acc_std": 0.06515151515151515,
+          "f1_mean": 0.7245144574685991,
+          "f1_std": 0.087556343882,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\deepseek\\prompt_dea7fdde3a.json"
+        }
+      ]
+    },
+    "Code/repo": {
+      "domain": "Code",
+      "rewriter": "repo",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo",
+      "num_prompts": 5,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.8984848484848484,
+          "max": 0.9530303030303031,
+          "range": 0.054545454545454675,
+          "mean": 0.9245454545454546,
+          "std": 0.02086842774145598,
+          "iqr": 0.021212121212121238
+        },
+        "f1": {
+          "min": 0.894413621146656,
+          "max": 0.9509084638794102,
+          "range": 0.05649484273275418,
+          "mean": 0.9210610710780331,
+          "std": 0.02149831064882325,
+          "iqr": 0.02074352189263373
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            1,
+            3,
+            0,
+            6,
+            0
+          ],
+          "top1_change_rate": 0.4
+        },
+        "f1": {
+          "winner_counts": [
+            1,
+            3,
+            0,
+            6,
+            0
+          ],
+          "top1_change_rate": 0.4
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.9575757575757576,
+          "best_single_mean": 0.9530303030303031,
+          "gap": 0.004545454545454519
+        },
+        "f1": {
+          "oracle_mean": 0.955765896040947,
+          "best_single_mean": 0.9509084638794102,
+          "gap": 0.004857432161536779
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.646047242497773,
+        "f1": 0.6795135762629101
+      },
+      "friedman_p": {
+        "acc": 1.983000384761931e-05,
+        "f1": 2.1714204276868515e-05
+      },
+      "prompts": [
+        {
+          "slug": "040352ab14",
+          "acc_mean": 0.9196969696969697,
+          "acc_std": 0.031818181818181836,
+          "f1_mean": 0.9155826259059971,
+          "f1_std": 0.03505225807172684,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo\\prompt_040352ab14.json"
+        },
+        {
+          "slug": "478bb70838",
+          "acc_mean": 0.9363636363636365,
+          "acc_std": 0.03163729245124411,
+          "f1_mean": 0.932572083175368,
+          "f1_std": 0.03466534388506312,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo\\prompt_478bb70838.json"
+        },
+        {
+          "slug": "6e1a5a23e3",
+          "acc_mean": 0.8984848484848484,
+          "acc_std": 0.03524152530185761,
+          "f1_mean": 0.894413621146656,
+          "f1_std": 0.03837775566731424,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo\\prompt_6e1a5a23e3.json"
+        },
+        {
+          "slug": "d3a28d2e42",
+          "acc_mean": 0.9530303030303031,
+          "acc_std": 0.02485033252554051,
+          "f1_mean": 0.9509084638794102,
+          "f1_std": 0.02659662701683263,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo\\prompt_d3a28d2e42.json"
+        },
+        {
+          "slug": "dea7fdde3a",
+          "acc_mean": 0.9151515151515153,
+          "acc_std": 0.02810187422877488,
+          "f1_mean": 0.9118285612827343,
+          "f1_std": 0.031361588865788555,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Code\\repo\\prompt_dea7fdde3a.json"
+        }
+      ]
+    },
+    "Yelp/deepseek": {
+      "domain": "Yelp",
+      "rewriter": "deepseek",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek",
+      "num_prompts": 7,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.6530864197530863,
+          "max": 0.7444444444444445,
+          "range": 0.09135802469135812,
+          "mean": 0.6798059964726633,
+          "std": 0.03363246795419905,
+          "iqr": 0.037345679012345645
+        },
+        "f1": {
+          "min": 0.6515567785952768,
+          "max": 0.7504236598655358,
+          "range": 0.098866881270259,
+          "mean": 0.6866135245512553,
+          "std": 0.03354403380700917,
+          "iqr": 0.03284738662682418
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            1,
+            0,
+            0,
+            2,
+            7,
+            0,
+            0
+          ],
+          "top1_change_rate": 0.30000000000000004
+        },
+        "f1": {
+          "winner_counts": [
+            0,
+            0,
+            0,
+            2,
+            8,
+            0,
+            0
+          ],
+          "top1_change_rate": 0.19999999999999996
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.7450617283950617,
+          "best_single_mean": 0.7444444444444445,
+          "gap": 0.0006172839506172201
+        },
+        "f1": {
+          "oracle_mean": 0.7524751277496324,
+          "best_single_mean": 0.7504236598655358,
+          "gap": 0.0020514678840966027
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.3188400358510062,
+        "f1": 0.22884162924969437
+      },
+      "friedman_p": {
+        "acc": 6.379036833378384e-06,
+        "f1": 4.104703366004161e-06
+      },
+      "prompts": [
+        {
+          "slug": "0e71ab1d20",
+          "acc_mean": 0.6574074074074074,
+          "acc_std": 0.02124927713340557,
+          "f1_mean": 0.6638740697634548,
+          "f1_std": 0.017393398416939508,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_0e71ab1d20.json"
+        },
+        {
+          "slug": "40e219c505",
+          "acc_mean": 0.6561728395061729,
+          "acc_std": 0.03683587345144614,
+          "f1_mean": 0.6515567785952768,
+          "f1_std": 0.04467147440381001,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_40e219c505.json"
+        },
+        {
+          "slug": "53e711ad1e",
+          "acc_mean": 0.6592592592592593,
+          "acc_std": 0.031329821087529686,
+          "f1_mean": 0.6712641096986418,
+          "f1_std": 0.02323283724618339,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_53e711ad1e.json"
+        },
+        {
+          "slug": "53f0588c52",
+          "acc_mean": 0.6950617283950618,
+          "acc_std": 0.028979492825445666,
+          "f1_mean": 0.6936259955307549,
+          "f1_std": 0.035221463081624056,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_53f0588c52.json"
+        },
+        {
+          "slug": "8f0a1ad264",
+          "acc_mean": 0.7444444444444445,
+          "acc_std": 0.03245293685949362,
+          "f1_mean": 0.7504236598655358,
+          "f1_std": 0.02915582720486483,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_8f0a1ad264.json"
+        },
+        {
+          "slug": "a528e08fd4",
+          "acc_mean": 0.6932098765432099,
+          "acc_std": 0.02359446278224246,
+          "f1_mean": 0.7057464529457355,
+          "f1_std": 0.021774882585462747,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_a528e08fd4.json"
+        },
+        {
+          "slug": "f58cc65f6c",
+          "acc_mean": 0.6530864197530863,
+          "acc_std": 0.0312079621228754,
+          "f1_mean": 0.6698036054593871,
+          "f1_std": 0.023052673214636502,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\deepseek\\prompt_f58cc65f6c.json"
+        }
+      ]
+    },
+    "Yelp/repo": {
+      "domain": "Yelp",
+      "rewriter": "repo",
+      "prompt_dir": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo",
+      "num_prompts": 7,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "dispersion": {
+        "acc": {
+          "min": 0.7296296296296296,
+          "max": 0.7981481481481483,
+          "range": 0.06851851851851865,
+          "mean": 0.7644620811287479,
+          "std": 0.023065991773267024,
+          "iqr": 0.028703703703703676
+        },
+        "f1": {
+          "min": 0.7346914749727458,
+          "max": 0.7948065427162869,
+          "range": 0.06011506774354114,
+          "mean": 0.7672136760737703,
+          "std": 0.021522820097700568,
+          "iqr": 0.02917080934937344
+        }
+      },
+      "top1": {
+        "acc": {
+          "winner_counts": [
+            0,
+            0,
+            1,
+            0,
+            7,
+            1,
+            1
+          ],
+          "top1_change_rate": 0.30000000000000004
+        },
+        "f1": {
+          "winner_counts": [
+            0,
+            0,
+            2,
+            0,
+            6,
+            1,
+            1
+          ],
+          "top1_change_rate": 0.4
+        }
+      },
+      "oracle": {
+        "acc": {
+          "oracle_mean": 0.8067901234567902,
+          "best_single_mean": 0.7981481481481483,
+          "gap": 0.00864197530864197
+        },
+        "f1": {
+          "oracle_mean": 0.8082842521418794,
+          "best_single_mean": 0.7948065427162869,
+          "gap": 0.013477709425592455
+        }
+      },
+      "avg_pairwise_corr": {
+        "acc": 0.25254847240077416,
+        "f1": 0.19729144259307305
+      },
+      "friedman_p": {
+        "acc": 3.017476832652379e-05,
+        "f1": 3.544630428114037e-05
+      },
+      "prompts": [
+        {
+          "slug": "0e71ab1d20",
+          "acc_mean": 0.7512345679012346,
+          "acc_std": 0.02961033322274434,
+          "f1_mean": 0.754499280347805,
+          "f1_std": 0.02414192398939143,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_0e71ab1d20.json"
+        },
+        {
+          "slug": "40e219c505",
+          "acc_mean": 0.7481481481481482,
+          "acc_std": 0.027578157905788485,
+          "f1_mean": 0.7493971936915482,
+          "f1_std": 0.024074738610413052,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_40e219c505.json"
+        },
+        {
+          "slug": "53e711ad1e",
+          "acc_mean": 0.7802469135802469,
+          "acc_std": 0.01876380759700082,
+          "f1_mean": 0.7853625640711959,
+          "f1_std": 0.019503742791395606,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_53e711ad1e.json"
+        },
+        {
+          "slug": "53f0588c52",
+          "acc_mean": 0.7296296296296296,
+          "acc_std": 0.01967577463025832,
+          "f1_mean": 0.7346914749727458,
+          "f1_std": 0.025334014671818426,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_53f0588c52.json"
+        },
+        {
+          "slug": "8f0a1ad264",
+          "acc_mean": 0.7981481481481483,
+          "acc_std": 0.028159246241869246,
+          "f1_mean": 0.7948065427162869,
+          "f1_std": 0.029473489015915875,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_8f0a1ad264.json"
+        },
+        {
+          "slug": "a528e08fd4",
+          "acc_mean": 0.7765432098765432,
+          "acc_std": 0.02450547313738174,
+          "f1_mean": 0.7768755286669041,
+          "f1_std": 0.025669769849476894,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_a528e08fd4.json"
+        },
+        {
+          "slug": "f58cc65f6c",
+          "acc_mean": 0.767283950617284,
+          "acc_std": 0.028428589974492487,
+          "f1_mean": 0.7748631480499066,
+          "f1_std": 0.024477706165828308,
+          "path": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_sensitivity\\Yelp\\repo\\prompt_f58cc65f6c.json"
+        }
+      ]
+    }
+  }
+}

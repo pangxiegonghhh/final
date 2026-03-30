@@ -1,0 +1,1 @@
+| Domain | Setting | Accuracy (mean±std) | F1 (mean±std) | Seeds |\n|---|---:|---:|---:|---:|\n| Yelp | Repo rewrite | 0.8451 ± 0.0227 | 0.8447 ± 0.0252 | 10 |\n| Yelp | DeepSeek rewrite | 0.7432 ± 0.0390 | 0.7405 ± 0.0396 | 10 |\n

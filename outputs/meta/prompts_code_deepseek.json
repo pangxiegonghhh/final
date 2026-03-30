@@ -1,0 +1,11 @@
+{
+  "domain": "Code",
+  "rewriter": "deepseek",
+  "keys": [
+    "Revise the code with your best effort",
+    "Help me polish this code",
+    "Rewrite the code with GPT style",
+    "Refine the code for me please",
+    "Concise the code without change the functionality"
+  ]
+}

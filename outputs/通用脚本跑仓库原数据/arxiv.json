@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-03-02T00:48:31",
+  "seed": 42,
+  "inputs": {
+    "gpt": "Arxiv\\rewrite_arxiv_gpt_inv.json",
+    "human": "Arxiv\\rewrite_arxiv_human_inv.json"
+  },
+  "data": {
+    "gpt_samples_used": 350,
+    "human_samples_used": 350,
+    "feature_dim": 50,
+    "max_idx_stop": 400,
+    "cutoff_start": 0,
+    "cutoff_end": 6000000
+  },
+  "model": {
+    "name": "MLPClassifier",
+    "hidden_layer_sizes": [
+      10
+    ],
+    "max_iter": 1000,
+    "activation": "relu",
+    "solver": "adam"
+  },
+  "metrics": {
+    "accuracy": 0.8571428571428571,
+    "f1": 0.855072463768116
+  }
+}

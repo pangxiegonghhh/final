@@ -1,0 +1,1 @@
+Domain,Setting,Accuracy(mean±std),F1(mean±std),Seeds\nArxiv,Repo rewrite,0.8443 ± 0.0153,0.8409 ± 0.0140,10\nArxiv,DeepSeek rewrite,0.6657 ± 0.0267,0.6538 ± 0.0412,10\n

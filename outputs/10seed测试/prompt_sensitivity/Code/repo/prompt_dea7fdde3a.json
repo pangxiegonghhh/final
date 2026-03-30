@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-03-02T22:33:40",
+  "seed": 42,
+  "inputs": {
+    "gpt": "outputs\\prompt_sensitivity\\Code\\repo\\subset_json\\gpt_dea7fdde3a.json",
+    "human": "outputs\\prompt_sensitivity\\Code\\repo\\subset_json\\human_dea7fdde3a.json"
+  },
+  "data": {
+    "gpt_samples_used": 164,
+    "human_samples_used": 164,
+    "feature_dim": 14,
+    "max_idx_stop": 163,
+    "cutoff_start": 0,
+    "cutoff_end": 6000000
+  },
+  "model": {
+    "name": "MLPClassifier",
+    "hidden_layer_sizes": [
+      10
+    ],
+    "max_iter": 1000,
+    "activation": "relu",
+    "solver": "adam"
+  },
+  "metrics": {
+    "accuracy": 0.9090909090909091,
+    "f1": 0.9090909090909091
+  },
+  "multi_seed_summary": {
+    "multi_seeds": 10,
+    "seed_start": 42,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "acc_list": [
+      0.9090909090909091,
+      0.9393939393939394,
+      0.9090909090909091,
+      0.8787878787878788,
+      0.8939393939393939,
+      0.9696969696969697,
+      0.8939393939393939,
+      0.9090909090909091,
+      0.8939393939393939,
+      0.9545454545454546
+    ],
+    "f1_list": [
+      0.9090909090909091,
+      0.9411764705882353,
+      0.90625,
+      0.8620689655172413,
+      0.8888888888888888,
+      0.9705882352941176,
+      0.8923076923076924,
+      0.9032258064516129,
+      0.8923076923076924,
+      0.9523809523809523
+    ],
+    "support_list": [
+      66,
+      66,
+      66,
+      66,
+      66,
+      66,
+      66,
+      66,
+      66,
+      66
+    ],
+    "acc_mean": 0.9151515151515153,
+    "acc_std": 0.02810187422877488,
+    "f1_mean": 0.9118285612827343,
+    "f1_std": 0.031361588865788555
+  },
+  "diagnostics": {
+    "topk": 20
+  }
+}

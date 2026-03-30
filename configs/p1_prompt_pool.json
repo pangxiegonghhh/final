@@ -1,0 +1,50 @@
+{
+  "prompt_pool": {
+    "P0_baseline": {
+      "system": "You are a careful editor.",
+      "user_template": "Rewrite the following paragraph to improve fluency while preserving meaning.\nTarget length: between {n_min} and {n_max} words (close to the original length).\n- Do NOT add new facts, names, numbers, or claims.\n- Do NOT delete important information.\n- Do NOT summarize.\n- Keep named entities and numeric values unchanged whenever possible.\nOutput ONLY the rewritten paragraph.\n\nParagraph:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P1_fluency": {
+      "system": "You are a careful editor.",
+      "user_template": "Rewrite the text to be more fluent and natural, keeping the meaning unchanged.\nTarget length: between {n_min} and {n_max} words.\nOutput ONLY the rewritten text.\n\nText:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P2_synonym": {
+      "system": "You are a careful editor.",
+      "user_template": "Paraphrase the text using different wording and phrasing while preserving meaning. Avoid copying long phrases.\nTarget length: between {n_min} and {n_max} words.\nOutput ONLY the rewritten text.\n\nText:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P3_restructure": {
+      "system": "You are a careful editor.",
+      "user_template": "Rewrite the text by changing sentence structures and order, but keep the meaning and details.\nTarget length: between {n_min} and {n_max} words.\nOutput ONLY the rewritten text.\n\nText:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P4_formal": {
+      "system": "You are a careful editor.",
+      "user_template": "Rewrite the text in a more formal academic style while preserving meaning and details.\nTarget length: between {n_min} and {n_max} words.\nOutput ONLY the rewritten text.\n\nText:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P5_concise": {
+      "system": "You are a careful editor.",
+      "user_template": "Make the text more concise but keep all information and key details. Do not remove named entities or numbers.\nTarget length: between {n_min} and {n_max} words.\nOutput ONLY the rewritten text.\n\nText:\n{text}",
+      "length_control": true,
+      "tolerance": 0.10
+    },
+    "P6_no_length": {
+      "system": "You are a careful editor.",
+      "user_template": "Rewrite the following paragraph to improve fluency while preserving meaning.\n- Do NOT add new facts, names, numbers, or claims.\n- Do NOT delete important information.\n- Do NOT summarize.\nOutput ONLY the rewritten paragraph.\n\nParagraph:\n{text}",
+      "length_control": false,
+      "tolerance": null
+    }
+  },
+  "rewrite_model": "deepseek-chat",
+  "base_url": "https://api.deepseek.com/v1",
+  "temperature": 0.7,
+  "max_tokens": 1024
+}

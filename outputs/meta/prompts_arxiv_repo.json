@@ -1,0 +1,13 @@
+{
+  "domain": "Arxiv",
+  "rewriter": "repo",
+  "keys": [
+    "Revise this with your best effort",
+    "Help me polish this",
+    "Rewrite this for me",
+    "Make this fluent while doing minimal change",
+    "Refine this for me please",
+    "Concise this for me and keep all the information",
+    "Improve this in GPT way"
+  ]
+}

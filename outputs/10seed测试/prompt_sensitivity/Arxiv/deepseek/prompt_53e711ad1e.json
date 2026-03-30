@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-03-02T22:19:46",
+  "seed": 42,
+  "inputs": {
+    "gpt": "outputs\\prompt_sensitivity\\Arxiv\\deepseek\\subset_json\\gpt_53e711ad1e.json",
+    "human": "outputs\\prompt_sensitivity\\Arxiv\\deepseek\\subset_json\\human_53e711ad1e.json"
+  },
+  "data": {
+    "gpt_samples_used": 350,
+    "human_samples_used": 350,
+    "feature_dim": 14,
+    "max_idx_stop": 349,
+    "cutoff_start": 0,
+    "cutoff_end": 6000000
+  },
+  "model": {
+    "name": "MLPClassifier",
+    "hidden_layer_sizes": [
+      10
+    ],
+    "max_iter": 1000,
+    "activation": "relu",
+    "solver": "adam"
+  },
+  "metrics": {
+    "accuracy": 0.5928571428571429,
+    "f1": 0.583941605839416
+  },
+  "multi_seed_summary": {
+    "multi_seeds": 10,
+    "seed_start": 42,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "acc_list": [
+      0.5928571428571429,
+      0.6357142857142857,
+      0.6714285714285714,
+      0.5571428571428572,
+      0.5928571428571429,
+      0.5357142857142857,
+      0.5928571428571429,
+      0.6,
+      0.5785714285714286,
+      0.6142857142857143
+    ],
+    "f1_list": [
+      0.583941605839416,
+      0.6277372262773723,
+      0.6461538461538462,
+      0.5441176470588235,
+      0.5714285714285714,
+      0.5038167938931297,
+      0.6013986013986014,
+      0.5942028985507246,
+      0.562962962962963,
+      0.5846153846153846
+    ],
+    "support_list": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ],
+    "acc_mean": 0.5971428571428572,
+    "acc_std": 0.036168539717634736,
+    "f1_mean": 0.5820375538178832,
+    "f1_std": 0.03842560675235883
+  },
+  "diagnostics": {
+    "topk": 20
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-03-02T20:18:21",
+  "seed": 42,
+  "inputs": {
+    "gpt": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\Yelp\\rewrite_yelp_gpt_inv.json",
+    "human": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\Yelp\\rewrite_yelp_human_inv.json"
+  },
+  "data": {
+    "gpt_samples_used": 401,
+    "human_samples_used": 401,
+    "feature_dim": 50,
+    "max_idx_stop": 400,
+    "cutoff_start": 0,
+    "cutoff_end": 6000000
+  },
+  "model": {
+    "name": "MLPClassifier",
+    "hidden_layer_sizes": [
+      10
+    ],
+    "max_iter": 1000,
+    "activation": "relu",
+    "solver": "adam"
+  },
+  "metrics": {
+    "accuracy": 0.8333333333333334,
+    "f1": 0.8343558282208589
+  },
+  "multi_seed_summary": {
+    "multi_seeds": 10,
+    "seed_start": 42,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "acc_list": [
+      0.8333333333333334,
+      0.8888888888888888,
+      0.8580246913580247,
+      0.845679012345679,
+      0.8271604938271605,
+      0.8024691358024691,
+      0.845679012345679,
+      0.8333333333333334,
+      0.845679012345679,
+      0.8703703703703703
+    ],
+    "f1_list": [
+      0.8343558282208589,
+      0.891566265060241,
+      0.8606060606060606,
+      0.84472049689441,
+      0.8313253012048193,
+      0.7974683544303798,
+      0.84472049689441,
+      0.8280254777070064,
+      0.8366013071895425,
+      0.8771929824561403
+    ],
+    "support_list": [
+      162,
+      162,
+      162,
+      162,
+      162,
+      162,
+      162,
+      162,
+      162,
+      162
+    ],
+    "acc_mean": 0.8450617283950617,
+    "acc_std": 0.022672058854576474,
+    "f1_mean": 0.8446582570663868,
+    "f1_std": 0.025230077702864652
+  },
+  "diagnostics": {
+    "topk": 20
+  }
+}

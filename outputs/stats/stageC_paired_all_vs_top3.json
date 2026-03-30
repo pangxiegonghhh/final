@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "compare": "Top3 - All",
+    "bootstrap_resamples": 20000
+  },
+  "groups": {
+    "Arxiv/repo": {
+      "acc": {
+        "n": 10,
+        "diff_mean": -0.026428571428571433,
+        "diff_std": 0.024058224912512624,
+        "ttest_p": 0.007006205229011779,
+        "wilcoxon_p": 0.015625,
+        "cohen_dz": -1.098525411774083,
+        "boot_ci95": {
+          "low": -0.040714285714285724,
+          "high": -0.012857142857142855
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": -0.026781838396954905,
+        "diff_std": 0.02594722889283332,
+        "ttest_p": 0.009776106992718565,
+        "wilcoxon_p": 0.01953125,
+        "cohen_dz": -1.032165650812604,
+        "boot_ci95": {
+          "low": -0.042016968044867514,
+          "high": -0.01184350459113011
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\arxiv_repo_350.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Arxiv\\repo\\top3.json"
+      }
+    },
+    "Arxiv/deepseek": {
+      "acc": {
+        "n": 10,
+        "diff_mean": -0.03285714285714284,
+        "diff_std": 0.05294073184642781,
+        "ttest_p": 0.08129913464357047,
+        "wilcoxon_p": 0.10546875,
+        "cohen_dz": -0.6206401330539953,
+        "boot_ci95": {
+          "low": -0.06499999999999999,
+          "high": -0.0035714285714285475
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": -0.03784544825498777,
+        "diff_std": 0.06906332720926336,
+        "ttest_p": 0.1171558984606411,
+        "wilcoxon_p": 0.130859375,
+        "cohen_dz": -0.5479818274656135,
+        "boot_ci95": {
+          "low": -0.07610115513139852,
+          "high": 0.00428233879855127
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\arxiv_deepseek_350.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Arxiv\\deepseek\\top3.json"
+      }
+    },
+    "Code/repo": {
+      "acc": {
+        "n": 10,
+        "diff_mean": 0.0030303030303030385,
+        "diff_std": 0.009582659576267824,
+        "ttest_p": 0.34343639613791277,
+        "wilcoxon_p": 0.5,
+        "cohen_dz": 0.31622776601683855,
+        "boot_ci95": {
+          "low": -0.003030303030303024,
+          "high": 0.009090909090909094
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": 0.003070596518177171,
+        "diff_std": 0.010449561570276173,
+        "ttest_p": 0.3770180712094864,
+        "wilcoxon_p": 0.875,
+        "cohen_dz": 0.293849315832685,
+        "boot_ci95": {
+          "low": -0.0036370327700972704,
+          "high": 0.008291730670762942
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\code_repo_164.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Code\\repo\\top3.json"
+      }
+    },
+    "Code/deepseek": {
+      "acc": {
+        "n": 10,
+        "diff_mean": 0.021212121212121217,
+        "diff_std": 0.045285882366585664,
+        "ttest_p": 0.17268508962953896,
+        "wilcoxon_p": 0.21875,
+        "cohen_dz": 0.468404723582744,
+        "boot_ci95": {
+          "low": -0.0030303030303030385,
+          "high": 0.05000000000000001
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": 0.023392908442433313,
+        "diff_std": 0.05127440412470933,
+        "ttest_p": 0.18298181563581564,
+        "wilcoxon_p": 0.232421875,
+        "cohen_dz": 0.45622974741036887,
+        "boot_ci95": {
+          "low": -0.0042335176523956,
+          "high": 0.055818002679533095
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\code_deepseek_164.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Code\\deepseek\\top3.json"
+      }
+    },
+    "Yelp/repo": {
+      "acc": {
+        "n": 10,
+        "diff_mean": 0.0030864197530864113,
+        "diff_std": 0.01775995524859263,
+        "ttest_p": 0.5959939908531486,
+        "wilcoxon_p": 0.609375,
+        "cohen_dz": 0.17378533390904752,
+        "boot_ci95": {
+          "low": -0.009259259259259234,
+          "high": 0.012345679012345645
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": 0.004233957787684784,
+        "diff_std": 0.0205724043736602,
+        "ttest_p": 0.5314245249409466,
+        "wilcoxon_p": 0.556640625,
+        "cohen_dz": 0.2058076300068122,
+        "boot_ci95": {
+          "low": -0.009734752640368174,
+          "high": 0.01483939286570122
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\yelp_repo_401.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Yelp\\repo\\top3.json"
+      }
+    },
+    "Yelp/deepseek": {
+      "acc": {
+        "n": 10,
+        "diff_mean": 0.0037037037037036978,
+        "diff_std": 0.0389536117405736,
+        "ttest_p": 0.7704968420949191,
+        "wilcoxon_p": 0.826171875,
+        "cohen_dz": 0.09507985365695797,
+        "boot_ci95": {
+          "low": -0.020370370370370372,
+          "high": 0.025925925925925908
+        }
+      },
+      "f1": {
+        "n": 10,
+        "diff_mean": 0.008590758184695457,
+        "diff_std": 0.03577477471124231,
+        "ttest_p": 0.46705278935156935,
+        "wilcoxon_p": 0.431640625,
+        "cohen_dz": 0.24013451528447474,
+        "boot_ci95": {
+          "low": -0.015087675342057679,
+          "high": 0.02766067716693146
+        }
+      },
+      "paths": {
+        "all": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\yelp_deepseek_401.json",
+        "top3": "E:\\jnu\\Final_thesis\\实验\\Raidar\\RaidarLLMDetect\\outputs\\10seed测试\\prompt_ensemble\\Yelp\\deepseek\\top3.json"
+      }
+    }
+  }
+}
